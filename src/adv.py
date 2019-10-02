@@ -1,4 +1,6 @@
 from room import Room
+from player import Player
+from prompt_toolkit import prompt
 
 # Declare all the rooms
 
@@ -39,6 +41,8 @@ room['treasure'].s_to = room['narrow']
 
 # Make a new player object that is currently in the 'outside' room.
 
+zelda = Player('zelda', 'outside')
+
 # Write a loop that:
 #
 # * Prints the current room name
@@ -49,3 +53,42 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+def current_room(user):
+    '''Prints out the room and room description of a players current location'''
+    print(room[user.current_room].name)
+    print(room[user.current_room].description)
+
+def direction_check(user, room_method):
+    '''Checks if a player can move in a user inputted direction'''
+    test_set = {name for (name,obj) in room.items() if obj == room_method}
+    if not test_set:
+        print("There's nowhere to go! Try another direction.")
+    else:
+        user.current_room = list(test_set)[0]
+        return (current_room(user))
+
+def move_room(user, user_input):
+    '''Moves player north, south, east, or west into a different room'''
+    if user_input == 'n':
+        return direction_check(user, room[user.current_room].n_to)
+
+    elif user_input == 's':
+        return direction_check(user, room[user.current_room].s_to)
+    
+    elif user_input == 'w':
+        return direction_check(user, room[user.current_room].w_to)
+    
+    elif user_input == 'e':
+        return direction_check(user, room[user.current_room].e_to)
+
+
+if __name__=="__main__":
+    user_name = prompt('Enter your character name:')
+    user_name = Player(user_name, 'outside')
+    current_room(user_name)
+    user_input = ' '
+    while user_input != 'q':
+        user_input = prompt('Choose a direction (n, s, e, w)')
+        print(user_input)
+        move_room(user_name, user_input)
