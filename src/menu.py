@@ -1,0 +1,10 @@
+def view_controls():
+    print('CONTROLS')
+    print('n: Move up one room to the north')
+    print('s: Move down one room to the south')
+    print('w: Move one room to the west')
+    print('e: Move one room to the east')
+    print('l: Look for items')
+    print('i: Check inventory')
+    print('get [item]: adds [item] to your inventory')
+    print('drop [item]: drops [item] from your inventory')
