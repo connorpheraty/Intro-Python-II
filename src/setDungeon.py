@@ -55,6 +55,33 @@ narrow="""
 |-----------------------------------|
 """
 
+treasure="""
+|-----------------------------------|
+|$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$|
+|$           ___^___               $|
+|$          |_______|       &      $|
+|$          S       S              $|
+|$                                 $|
+|$                          &      $|
+|$                            &    $|
+|$$$$$$$$$$$$$$$$$$   $$$$$$$$$$$$$$|                         
+|-------------------  --------------|
+"""
+
+dark_passage="""
+|--------------\     /--------------|
+|              |     |              |
+|              |     |         /----|  
+|              |     |        /   
+|______________\      \      / /----|
+|                      \----/ /     |
+|----------------------------/      |
+|                                   |
+|                                   |
+|-----------------------------------|
+"""
+
+
 
 
 # Declare all the rooms
@@ -75,10 +102,10 @@ to north. The smell of gold permeates the air.""", narrow),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south.""", outside),
+earlier adventurers. The only exit is to the south.""", treasure),
 
     'dark passageway': Room("Dark Passageway", """It is pitch black in here! You can barely
-see a light eminating from the west end of the passageway. You hear noises eminating from the ceiling.""", outside)
+see a light eminating from the west end of the passageway. You hear noises eminating from the ceiling.""", dark_passage)
 }
 
 item = {
