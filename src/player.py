@@ -16,6 +16,6 @@ class Player:
         lst = self.inventory
         print("INVENTORY:")
         for i in lst:
-            print(i.name)
+            print(i.name," - ", i.description)
 
 

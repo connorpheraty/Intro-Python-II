@@ -22,16 +22,16 @@ def move_room(user, room_method):
 def controls(user, user_input):
     '''Moves player north, south, east, or west into a different room'''
     if user_input == 'n':
-        return move_room(user, room[user.current_room].n_to)
+        return move_room(user, room[user.current_room].n_to), print(room[user.current_room].viz)
 
     elif user_input == 's':
-        return move_room(user, room[user.current_room].s_to)
+        return move_room(user, room[user.current_room].s_to), print(room[user.current_room].viz)
     
     elif user_input == 'w':
-        return move_room(user, room[user.current_room].w_to)
+        return move_room(user, room[user.current_room].w_to), print(room[user.current_room].viz)
     
     elif user_input == 'e':
-        return move_room(user, room[user.current_room].e_to)
+        return move_room(user, room[user.current_room].e_to), print(room[user.current_room].viz)
     
     elif user_input == 'l':
         return search_room(user)
@@ -60,7 +60,9 @@ if __name__=="__main__":
     print("Enter 'm' to view controls")
     print('---------------- @@ -----------------')
     current_room(user_name)
+    print(room[user_name.current_room].viz)
     while user_input != 'q':
         user_input = input()
         print('---------------- @@ -----------------')
         controls(user_name, user_input)
+

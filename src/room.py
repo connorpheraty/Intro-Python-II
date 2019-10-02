@@ -1,8 +1,9 @@
 class Room:
 
-    def __init__(self, room_name, description):
+    def __init__(self, room_name, description, viz):
         self.name = room_name
         self.description = description
+        self.viz = viz
         self.item_list = []
 
     def n_to(self):
