@@ -1,7 +1,7 @@
 from room import Room
 from player import Player
 from item import Item
-from actions import search_room, get_item, drop_item
+from actions import search_room, get_item, drop_item, lighten_room
 from setDungeon import room
 from menu import view_controls
 
@@ -22,31 +22,41 @@ def move_room(user, room_method):
 def controls(user, user_input):
     '''Moves player north, south, east, or west into a different room'''
     if user_input == 'n':
-        return move_room(user, room[user.current_room].n_to), print(room[user.current_room].viz)
+        return move_room(user, room[user.current_room].n_to), room[user.current_room].set_room_light(), print(room[user.current_room].viz)
 
     elif user_input == 's':
-        return move_room(user, room[user.current_room].s_to), print(room[user.current_room].viz)
+        return move_room(user, room[user.current_room].s_to), room[user.current_room].set_room_light(), print(room[user.current_room].viz)
     
     elif user_input == 'w':
-        return move_room(user, room[user.current_room].w_to), print(room[user.current_room].viz)
+        return move_room(user, room[user.current_room].w_to), room[user.current_room].set_room_light(), print(room[user.current_room].viz)
     
     elif user_input == 'e':
-        return move_room(user, room[user.current_room].e_to), print(room[user.current_room].viz)
+        return move_room(user, room[user.current_room].e_to), room[user.current_room].set_room_light(), print(room[user.current_room].viz)
     
-    elif user_input == 'l':
+    elif user_input == '1':
         return search_room(user)
 
-    elif user_input == 'm':
+    elif user_input == '2':
+        status = room[user.current_room].is_light
+        return lighten_room(user, status, room)
+
+    elif user_input == 'c':
         return view_controls()
 
     elif user_input == 'i':
         return user.check_inv()
+
+    elif user_input == 'm':
+        return print(room[user.current_room].viz)
 
     elif user_input.split()[0] == 'get':
         return get_item(user_input, user)
 
     elif user_input.split()[0] == 'drop':
         return drop_item(user_input, user)
+    
+    else:
+        print("Enter 'c' to view controls")
 
 
 if __name__=="__main__":
@@ -57,7 +67,7 @@ if __name__=="__main__":
     print(f'Welcome {user_id} to the scary dungeon!')
     print('\n')
     user_input = ''
-    print("Enter 'm' to view controls")
+    print("Enter 'c' to view controls")
     print('---------------- @@ -----------------')
     current_room(user_name)
     print(room[user_name.current_room].viz)

@@ -1,10 +1,15 @@
 class Room:
 
-    def __init__(self, room_name, description, viz):
+    def __init__(self, room_name, description, light_viz, dark_viz, is_light=True):
         self.name = room_name
         self.description = description
-        self.viz = viz
+        self.light_viz = light_viz
+        self.dark_viz = dark_viz
+        self.viz = light_viz
         self.item_list = []
+        self.is_light = is_light
+
+
 
     def n_to(self):
         '''Links a room together South to North'''
@@ -34,4 +39,13 @@ class Room:
         '''Removes item from room when picked up by player'''
 
         self.item_list.remove(item)
+
+    def set_room_light(self):
+        if self.is_light == True:
+            self.viz = self.light_viz
+        else:
+            self.viz = self.dark_viz
+
+    def lighten_room(self):
+        self.viz = self.light_viz
 

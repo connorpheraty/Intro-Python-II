@@ -1,7 +1,20 @@
 from room import Room
-from item import Item
+from item import Item, LightSource
 
 # Room visualizations
+
+dark_viz ="""
+|-----------------------------------|
+|                                   |
+|                                   |
+|                                   |
+|                                   |
+|                                   |
+|                                   |
+|                                   |
+|                                   |
+|-----------------------------------|
+"""
 
 outside="""
 |--------------\     /--------------|
@@ -88,24 +101,24 @@ dark_passage="""
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons", outside),
+                     "North of you, the cave mount beckons", outside, dark_viz),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north, west and east.""", foyer),
+passages run north, west and east.""", foyer, dark_viz),
 
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
-the distance, but there is no way across the chasm.""", overlook),
+the distance, but there is no way across the chasm.""", overlook, dark_viz),
 
     'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air.""", narrow),
+to north. The smell of gold permeates the air.""", narrow, dark_viz, is_light=False),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south.""", treasure),
+earlier adventurers. The only exit is to the south.""", treasure, dark_viz),
 
     'dark passageway': Room("Dark Passageway", """It is pitch black in here! You can barely
-see a light eminating from the west end of the passageway. You hear noises eminating from the ceiling.""", dark_passage)
+see a light eminating from the west end of the passageway. You hear noises eminating from the ceiling.""", dark_passage, dark_viz, is_light=False)
 }
 
 item = {
@@ -115,7 +128,8 @@ item = {
     'broken_shield': Item("Broken Shield", "It's broken and can't be used!"),
     'skeleton_bone': Item("Skeleton Bone", "It looks like it has been here for ages!"),
     'old_journal': Item('Old Journal', "It's written in a language you don't understand."),
-    'ol_rustys_hammer': Item("Ol' Rusty's Hammer", "You feel the power of Ol' Rusty eminating through you.")
+    'ol_rustys_hammer': Item("Ol' Rusty's Hammer", "You feel the power of Ol' Rusty eminating through you."),
+    'lamp': LightSource("Lamp", "It lightens up the room!")
 }
 # Link rooms together
 
@@ -137,11 +151,13 @@ room['dark passageway'].e_to = room['foyer']
 
 
 # Create items in rooms
-room['outside'].item_list = [item['stick'], item['rock']]
+room['outside'].item_list = [item['stick'], item['rock'], item['lamp']]
 room['foyer'].item_list = [item['dusty_rod'], item['broken_shield']]
 room['overlook'].item_list = [item['old_journal']]
 room['treasure'].item_list = [item['skeleton_bone']]
 room['overlook'].item_list = [item['ol_rustys_hammer']]
+
+# Create Light Source item
 
 
 
