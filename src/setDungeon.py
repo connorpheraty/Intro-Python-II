@@ -26,7 +26,8 @@ earlier adventurers. The only exit is to the south.""", treasure, dark_viz, is_l
 see a light eminating from the west end of the passageway. You hear strange noises coming from the north.""", dark_passage, dark_viz, is_light=False),
 
     'strange_room': Room("Strange Room", "You feel like you are being watched.", face_room, dark_viz),
-    'regal_hallway': Room("Regal Hallway", "You hear monsters stirring about on the ground floor.", regal_hallway, dark_viz, is_locked=True)
+    'regal_hallway': Room("Regal Hallway", "You hear monsters stirring about on the ground floor.", regal_hallway, dark_viz, is_locked=True),
+    'kings_corner': Room("King's Corner", "You know what to do. Just do it.", kings_corner, dark_viz)
 }
 
 item = {
@@ -70,6 +71,10 @@ room['strange_room'].s_to = room['dark passageway']
 
 # Room 08 LOCKED
 room['regal_hallway'].e_to = room['dark passageway']
+room['regal_hallway'].n_to = room['kings_corner']
+
+# Room 09
+room['kings_corner'].s_to = room['regal_hallway']
 
 # Create items in rooms
 room['outside'].item_list = [item['stick'], item['rock']]

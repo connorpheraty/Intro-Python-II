@@ -3,7 +3,7 @@ from player import Player
 from item import Item, Key
 from actions import search_room, get_item, drop_item, lighten_room
 from setDungeon import room, item
-from titleScreen import title_screen
+from titleScreen import title_screen, game_over
 from menu import view_controls
 
 
@@ -42,7 +42,11 @@ def move_room2(user, room_method):
 
 def controls(user, user_input):
     '''Moves player north, south, east, or west into a different room'''
-    if user_input == 'n':
+    if user_input == 'n' and room[user.current_room].name == "King's Corner":
+        print(game_over)
+        user_input = 'q'
+
+    elif user_input == 'n':
         return move_room2(user, room[user.current_room].n_to), room[user.current_room].set_room_light(), print(room[user.current_room].viz)
 
     elif user_input == 's':
@@ -82,7 +86,7 @@ def controls(user, user_input):
 
     elif user_input.split()[0] == 'drop':
         return drop_item(user_input, user)
-    
+
     else:
         print("Enter 'c' to view controls")
 
