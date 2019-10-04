@@ -23,7 +23,7 @@ chamber! Sadly, it has already been completely emptied by
 earlier adventurers. The only exit is to the south.""", treasure, dark_viz, is_locked=True),
 
     'dark passageway': Room("Dark Passageway", """It is pitch black in here! You can barely
-see a light eminating from the west end of the passageway. You hear noises eminating from the ceiling.""", dark_passage, dark_viz, is_light=False),
+see a light eminating from the west end of the passageway. You hear strange noises coming from the north.""", dark_passage, dark_viz, is_light=False),
 
     'strange_room': Room("Strange Room", "You feel like you are being watched.", face_room, dark_viz),
     'regal_hallway': Room("Regal Hallway", "You hear monsters stirring about on the ground floor.", regal_hallway, dark_viz, is_locked=True)
