@@ -13,11 +13,10 @@ class Item:
         item = self.name
         print(f'You have dropped {item}!')
 
-class Treasures(Item):
+class Key(Item):
 
-    def __init__(self, name, description, value):
+    def __init__(self, name, description):
         super().__init__(name, description)
-        self.value = value
 
 class LightSource(Item):
 

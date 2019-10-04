@@ -1,6 +1,6 @@
 class Room:
 
-    def __init__(self, room_name, description, light_viz, dark_viz, is_light=True):
+    def __init__(self, room_name, description, light_viz, dark_viz, is_light=True, is_locked=False):
         self.name = room_name
         self.description = description
         self.light_viz = light_viz
@@ -8,6 +8,7 @@ class Room:
         self.viz = light_viz
         self.item_list = []
         self.is_light = is_light
+        self.is_locked = is_locked
 
 
 
@@ -48,4 +49,5 @@ class Room:
 
     def lighten_room(self):
         self.viz = self.light_viz
+        self.is_light = True
 

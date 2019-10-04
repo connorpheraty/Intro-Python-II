@@ -3,7 +3,9 @@ from player import Player
 from item import Item
 from actions import search_room, get_item, drop_item, lighten_room
 from setDungeon import room
+from titleScreen import title_screen
 from menu import view_controls
+
 
 def current_room(user):
     '''Prints out the room and room description of a players current location'''
@@ -19,6 +21,10 @@ def move_room(user, room_method):
         user.current_room = list(test_set)[0]
         return (current_room(user))
 
+def move_room2(user, room_method):
+    pass
+    
+
 def controls(user, user_input):
     '''Moves player north, south, east, or west into a different room'''
     if user_input == 'n':
@@ -33,10 +39,10 @@ def controls(user, user_input):
     elif user_input == 'e':
         return move_room(user, room[user.current_room].e_to), room[user.current_room].set_room_light(), print(room[user.current_room].viz)
     
-    elif user_input == '1':
+    elif user_input == 'l':
         return search_room(user)
 
-    elif user_input == '2':
+    elif user_input == 'j':
         status = room[user.current_room].is_light
         return lighten_room(user, status, room)
 
@@ -48,6 +54,9 @@ def controls(user, user_input):
 
     elif user_input == 'm':
         return print(room[user.current_room].viz)
+
+    elif user_input == '':
+        print("Enter 'c' to view controls")
 
     elif user_input.split()[0] == 'get':
         return get_item(user_input, user)
@@ -64,7 +73,8 @@ if __name__=="__main__":
     user_name = Player(user_id)
     print('---------------- @@ -----------------')
 
-    print(f'Welcome {user_id} to the scary dungeon!')
+    print(f'Welcome {user_id} to...')
+    print(title_screen)
     print('\n')
     user_input = ''
     print("Enter 'c' to view controls")
