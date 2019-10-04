@@ -42,11 +42,8 @@ def move_room2(user, room_method):
 
 def controls(user, user_input):
     '''Moves player north, south, east, or west into a different room'''
-    if user_input == 'n' and room[user.current_room].name == "King's Corner":
-        print(game_over)
-        user_input = 'q'
 
-    elif user_input == 'n':
+    if user_input == 'n':
         return move_room2(user, room[user.current_room].n_to), room[user.current_room].set_room_light(), print(room[user.current_room].viz)
 
     elif user_input == 's':

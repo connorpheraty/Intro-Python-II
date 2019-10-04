@@ -27,7 +27,8 @@ see a light eminating from the west end of the passageway. You hear strange nois
 
     'strange_room': Room("Strange Room", "You feel like you are being watched.", face_room, dark_viz),
     'regal_hallway': Room("Regal Hallway", "You hear monsters stirring about on the ground floor.", regal_hallway, dark_viz, is_locked=True),
-    'kings_corner': Room("King's Corner", "You know what to do. Just do it.", kings_corner, dark_viz)
+    'kings_corner': Room("King's Corner", "You know what to do. Just do it.", kings_corner, dark_viz),
+    'dumb_room': Room("Dumb Room", "Look at you...", dumb_room, dark_viz)
 }
 
 item = {
@@ -75,6 +76,10 @@ room['regal_hallway'].n_to = room['kings_corner']
 
 # Room 09
 room['kings_corner'].s_to = room['regal_hallway']
+room['kings_corner'].n_to = room['dumb_room']
+
+# Room 10
+room['dumb_room'].s_to = room['kings_corner']
 
 # Create items in rooms
 room['outside'].item_list = [item['stick'], item['rock']]
