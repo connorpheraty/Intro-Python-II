@@ -51,3 +51,5 @@ class Room:
         self.viz = self.light_viz
         self.is_light = True
 
+        
+

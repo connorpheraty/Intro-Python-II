@@ -1,8 +1,8 @@
 from room import Room
 from player import Player
-from item import Item
+from item import Item, Key
 from actions import search_room, get_item, drop_item, lighten_room
-from setDungeon import room
+from setDungeon import room, item
 from titleScreen import title_screen
 from menu import view_controls
 
@@ -22,22 +22,37 @@ def move_room(user, room_method):
         return (current_room(user))
 
 def move_room2(user, room_method):
-    pass
-    
+    test_set = {name for (name,obj) in room.items() if obj == room_method}
+    if not test_set:
+        print("There's nowhere to go! Try another direction.")
+    else:
+        lock_room = list(test_set)[0]
+        if room[lock_room].is_locked == True:
+            if user.has_key == True:
+                print("You use a key to open the locked door...")
+                print('')
+                move_room(user, room_method)
+                user.check_for_key
+                
+            else:
+                print("This door is locked!")
+        else:
+            move_room(user, room_method)  
+
 
 def controls(user, user_input):
     '''Moves player north, south, east, or west into a different room'''
     if user_input == 'n':
-        return move_room(user, room[user.current_room].n_to), room[user.current_room].set_room_light(), print(room[user.current_room].viz)
+        return move_room2(user, room[user.current_room].n_to), room[user.current_room].set_room_light(), print(room[user.current_room].viz)
 
     elif user_input == 's':
-        return move_room(user, room[user.current_room].s_to), room[user.current_room].set_room_light(), print(room[user.current_room].viz)
+        return move_room2(user, room[user.current_room].s_to), room[user.current_room].set_room_light(), print(room[user.current_room].viz)
     
     elif user_input == 'w':
-        return move_room(user, room[user.current_room].w_to), room[user.current_room].set_room_light(), print(room[user.current_room].viz)
+        return move_room2(user, room[user.current_room].w_to), room[user.current_room].set_room_light(), print(room[user.current_room].viz)
     
     elif user_input == 'e':
-        return move_room(user, room[user.current_room].e_to), room[user.current_room].set_room_light(), print(room[user.current_room].viz)
+        return move_room2(user, room[user.current_room].e_to), room[user.current_room].set_room_light(), print(room[user.current_room].viz)
     
     elif user_input == 'l':
         return search_room(user)
@@ -58,6 +73,10 @@ def controls(user, user_input):
     elif user_input == '':
         print("Enter 'c' to view controls")
 
+    elif user_input == 'Scary Terry' and room[user.current_room].name == 'Strange Room':
+        room[user.current_room].add_item_room(item['small_key'])
+        print("A Small Key has appeared from the wall!")
+
     elif user_input.split()[0] == 'get':
         return get_item(user_input, user)
 
@@ -66,7 +85,6 @@ def controls(user, user_input):
     
     else:
         print("Enter 'c' to view controls")
-
 
 if __name__=="__main__":
     user_id = input('Enter your character name:')

@@ -25,19 +25,20 @@ earlier adventurers. The only exit is to the south.""", treasure, dark_viz, is_l
     'dark passageway': Room("Dark Passageway", """It is pitch black in here! You can barely
 see a light eminating from the west end of the passageway. You hear noises eminating from the ceiling.""", dark_passage, dark_viz, is_light=False),
 
-    'r_o_b': Room("Room of Bones", "Bones surround the walls of this room.", r_o_b, dark_viz, is_locked=True)
+    'strange_room': Room("Strange Room", "You feel like you are being watched.", face_room, dark_viz),
+    'regal_hallway': Room("Regal Hallway", "You hear monsters stirring about on the ground floor.", regal_hallway, dark_viz, is_locked=True)
 }
 
 item = {
-    'stick': Item("Stick", "It's brown and sticky!"),
-    'rock': Item("Rock", "You can throw this at people you don't like"),
-    'dusty_rod': Item("Dusty Rod", "This looks like it has seen some action"),
-    'broken_shield': Item("Broken Shield", "It's broken and can't be used!"),
-    'skeleton_bone': Item("Skeleton Bone", "It looks like it has been here for ages!"),
-    'old_journal': Item('Old Journal', "It's written in a language you don't understand."),
-    'ol_rustys_hammer': Item("Ol' Rusty's Hammer", "You feel the power of Ol' Rusty eminating through you."),
-    'lamp': LightSource("Lamp", "It lightens up the room!"),
-    'small_key': Key("Small Key", "Opens locked doors")
+    'stick': Item("Stick", "It's brown and sticky!", is_key=False),
+    'rock': Item("Rock", "You can throw this at people you don't like", is_key=False),
+    'dusty_rod': Item("Dusty Rod", "This looks like it has seen some action", is_key=False),
+    'broken_shield': Item("Broken Shield", "It's broken and can't be used!", is_key=False),
+    'skeleton_bone': Item("Skeleton Bone", "It looks like it has been here for ages!", is_key=False),
+    'old_journal': Item('Old Journal', 'The pages in this journal are frayed and the words are hardly legible. Looking closely you make out the name "Scary Terry"', is_key=False),
+    'ol_rustys_hammer': Item("Ol' Rusty's Hammer", "You feel the power of Ol' Rusty eminating through you.", is_key=False),
+    'lamp': LightSource("Lamp", "It lightens up the room!", is_key=False),
+    'small_key': Key("Small Key", "Opens locked doors", is_key=True)
 }
 # Link rooms together
 # Room 01
@@ -60,18 +61,23 @@ room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
 # Room 06 
-room['dark passageway'].n_to = room['r_o_b']
+room['dark passageway'].n_to = room['strange_room']
 room['dark passageway'].e_to = room['foyer']
+room['dark passageway'].w_to = room['regal_hallway']
 
-# Room 07 LOCKEd
-room['r_o_b'].s_to = room['dark passageway']
+# Room 07 
+room['strange_room'].s_to = room['dark passageway']
+
+# Room 08 LOCKED
+room['regal_hallway'].e_to = room['dark passageway']
 
 # Create items in rooms
 room['outside'].item_list = [item['stick'], item['rock']]
 room['foyer'].item_list = [item['dusty_rod'], item['broken_shield']]
-room['overlook'].item_list = [item['old_journal'], item['lamp'], item['ol_rustys_hammer']]
-room['treasure'].item_list = [item['skeleton_bone']]
+room['overlook'].item_list = [item['lamp'], item['ol_rustys_hammer']]
+room['treasure'].item_list = [item['skeleton_bone'], item['old_journal']]
 room['narrow'].item_list = [item['small_key']]
+
 
 
 

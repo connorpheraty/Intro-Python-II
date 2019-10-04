@@ -24,6 +24,7 @@ def get_item(user_input, user):
             user.get_item_inv(i)
             room[user.current_room].rem_item_room(i)
             user.change_light_status()
+            user.check_for_key()
 
 def drop_item(user_input, user):
     lst = user_input.split(' ', 1)
@@ -34,6 +35,7 @@ def drop_item(user_input, user):
             user.drop_item_inv(i)
             room[user.current_room].add_item_room(i)
             user.change_light_status()
+            user.check_for_key()
 
 def lighten_room(user, status, room):
     if status==False:
