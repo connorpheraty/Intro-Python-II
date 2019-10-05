@@ -25,10 +25,17 @@ earlier adventurers. The only exit is to the south.""", treasure, dark_viz, is_l
     'dark passageway': Room("Dark Passageway", """It is pitch black in here! You can barely
 see a light eminating from the west end of the passageway. You hear strange noises coming from the north.""", dark_passage, dark_viz, is_light=False),
 
-    'strange_room': Room("Strange Room", "You feel like you are being watched.", face_room, dark_viz),
+    'strange_room': Room("Strange Room", "You feel like you are being watched.", face_room_cool, dark_viz),
     'regal_hallway': Room("Regal Hallway", "You hear monsters stirring about on the ground floor.", regal_hallway, dark_viz, is_locked=True),
     'kings_corner': Room("King's Corner", "You know what to do. Just do it.", kings_corner, dark_viz),
-    'dumb_room': Room("Dumb Room", "Look at you...", dumb_room, dark_viz)
+    'narrow_hall': Room("Narrow Hall", "Water surrounds the walkway on both sides.", narrow_hall, dark_viz),
+    'northern_foyer': Room("Northern Foyer", "Three unlit torches are present at the center of the room.", northern_foyer, dark_viz),
+    'northern_overlook': Room("Grand Overlook - North", """A steep cliff appears before you, falling
+into the darkness.""", grand_overlook_north, dark_viz),
+    'face_room_concerned': Room("Strange Room", "I am concerned about my two brothers!", face_room_concerned, dark_viz),
+    'face_room_angry': Room("Strange Room", "I am angry at my two brothers!", face_room_angry, dark_viz),
+    'boss_room': Room("Boss Room", "This door is huge!", boss_door, dark_viz),
+    'dark_passageway2': Room("Dark Passage", "It's pitch black in here!", dark_passage2, dark_viz, is_light=False)
 }
 
 item = {
@@ -40,7 +47,8 @@ item = {
     'old_journal': Item('Old Journal', 'The pages in this journal are frayed and the words are hardly legible. Looking closely you make out the name "Scary Terry"', is_key=False),
     'ol_rustys_hammer': Item("Ol' Rusty's Hammer", "You feel the power of Ol' Rusty eminating through you.", is_key=False),
     'lamp': LightSource("Lamp", "It lightens up the room!", is_key=False),
-    'small_key': Key("Small Key", "Opens locked doors", is_key=True)
+    'small_key': Key("Small Key", "Opens locked doors", is_key=True),
+    'dunce_hat': Key("Dunce Hat", "Wearing this hat, you suddenly understand the appeal of reality tv shows.", is_key=False)
 }
 # Link rooms together
 # Room 01
@@ -76,10 +84,34 @@ room['regal_hallway'].n_to = room['kings_corner']
 
 # Room 09
 room['kings_corner'].s_to = room['regal_hallway']
-room['kings_corner'].n_to = room['dumb_room']
+room['kings_corner'].n_to = room['face_room_concerned']
+room['kings_corner'].e_to = room['narrow_hall']
 
 # Room 10
-room['dumb_room'].s_to = room['kings_corner']
+room['face_room_concerned'].s_to = room['kings_corner']
+
+# Room 11
+room['narrow_hall'].w_to = room['kings_corner']
+room['narrow_hall'].e_to = room['northern_foyer']
+
+# Room 12
+room['northern_foyer'].w_to = room['narrow_hall']
+room['northern_foyer'].s_to = room['northern_overlook']
+room['northern_foyer'].n_to = room['boss_room']
+room['northern_foyer'].e_to = room['dark_passageway2']
+
+# Room 13
+room['northern_overlook'].n_to = room['northern_foyer']
+
+# Room 14
+room['boss_room'].s_to = room['northern_foyer']
+
+# Room 15
+room['dark_passageway2'].w_to = room['northern_foyer']
+room['dark_passageway2'].n_to = room['face_room_angry']
+
+# Room 16
+room['face_room_angry'].s_to = room['dark_passageway2']
 
 # Create items in rooms
 room['outside'].item_list = [item['stick'], item['rock']]
